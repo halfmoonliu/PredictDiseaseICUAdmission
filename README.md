@@ -1,4 +1,4 @@
-# Predict the Need of ICU Admission for Patients with Specific Disease
+# Predict the Need for ICU Admission for Patients with Specific Disease
 
 In this directory, we will walk through a woking demo for predicting the need for ICU admission within the first 24 hours of admission.
 
