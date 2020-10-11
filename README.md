@@ -4,10 +4,10 @@ In this directory, we will walk through a woking demo for predicting the need fo
 
 There are five main scripts in the directory.
 
-1. Data Generation: Generate the data needed for the demo. This project makes use of self generated data to avoid privacy issue of real-world data.
-2. Preprocessing: A library containing preprocessing scripts which is used across settings.
-3. Cohort Selection: Used to choose the predefined group of patients for ICU Admission evaluation.
-4. Underlying Disease: The script utilizes discharge diagnosis code of patients and categorize them into 15 underllying, or long-term comorbid disease.
-5. Lab data: Extract and preprocess clinically relavent lab data, or bio-chemical test, results.
-6. Feature Selection: Choose relevant features to create dataset for model buildup.
-7. Model Performance Evaluation: Compare the performance of diffrent family of machine learning algorithms with common indices, such as overall acuracy, precision, recall, F1 Score and area under receivor operation curve.
+1. __**Data Generation**__: Generate the data needed for the demo. This project makes use of self generated data to avoid privacy issue of real-world data.
+2. __**Preprocessing**__: A library containing preprocessing scripts which is used across settings.
+3. __**Cohort Selection**__: Used to choose the predefined group of patients for ICU Admission evaluation.
+4. __**Underlying Disease**__: The script utilizes discharge diagnosis code of patients and categorize them into 15 underllying, or long-term comorbid disease.
+5. __**Lab data**__: Extract and preprocess clinically relavent lab data, or bio-chemical test, results.
+6. __**Feature Selection**__: Choose relevant features to create dataset for model buildup.
+7. __**Model Performance Evaluation**__: Compare the performance of diffrent family of machine learning algorithms with common indices, such as overall acuracy, precision, recall, F1 Score and area under receivor operation curve.
