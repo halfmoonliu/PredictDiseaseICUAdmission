@@ -4,7 +4,7 @@ In this directory, we will walk through a woking demo for predicting the need fo
 
 There are five main scripts in the directory.
 
-1. __**Data Generation**__: Generate the data needed for the demo. This project makes use of self generated data to avoid privacy issue of real-world data.
+1. __**Data Set Generation**__: Generate the data needed for the demo. This project makes use of self generated data to avoid privacy issue of real-world data.
 2. __**Preprocessing**__: A library containing preprocessing scripts which is used across settings.
 3. __**Cohort Selection**__: Used to choose the predefined group of patients for ICU Admission evaluation.
 4. __**Underlying Disease**__: The script utilizes discharge diagnosis code of patients and categorize them into 15 underllying, or long-term comorbid disease.
