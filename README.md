@@ -2,7 +2,7 @@
 
 In this directory, we will walk through a woking demo for predicting the need for ICU admission within the first 24 hours of admission.
 
-There are five main scripts in the directory.
+Below are the main scripts used in the project.
 
 1. __**Data Set Generation**__: Generate the data needed for the demo. This project makes use of self generated data to avoid privacy issue of real-world data.
 2. __**Preprocessing**__: A library containing preprocessing scripts which is used across settings.
