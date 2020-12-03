@@ -324,7 +324,7 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
     ICURecord_df = pd.DataFrame(ICURecord_list, columns = ['AdmissionID', 'InICUDatetime', 'OutICUDateTime'])
     VitalSign_df = pd.DataFrame(VitalSign_list, columns = ['AdmissionID', 'RecordDateTime', 'VitalSignType', 'VitalSignValue'])
     Exam_df = pd.DataFrame(Exam_list, columns = ['AdmissionID', 'SamplingDateTime', 'ExamType', 'ExamResult'])
-    return Demographics_df, DischargeDiagnosis_df, ICURecord_df, VitalSign_df, Exam_df                                   
+    return Demographics_df, DischargeDiagnosis_df, ICURecord_df, VitalSign_df, Exam_df, ICDCodebook                                   
                                    
 #Demographics_raw , DischargeDiagnosis_raw, ICURecord_raw, VitalSign_df, Exam_df= GenerateDataset(50, "1/1/1982", "12/31/2000", "1/1/2000 00:00:00", "12/31/2010 23:59:59")
 #Demographics_raw.head()                                        
