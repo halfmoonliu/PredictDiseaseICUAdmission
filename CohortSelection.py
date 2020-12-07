@@ -7,16 +7,7 @@ Created on Mon Dec  7 16:32:56 2020
 import numpy as np
 import pandas as pd
 import sys
-sys.path.insert(0, 'C:\Document\GeneratedData')
 import Libraries
-
-DischargeDiagnosis_raw = pd.read_csv(r'C:\Document\GeneratedData\DischargeDiagnosis.csv', header =0)
-
-ICDCodeBook = pd.read_csv(r'C:\Document\GeneratedData\ICDCodebook.csv', header =0)
-
-Demographics_raw = pd.read_csv(r'C:\Document\GeneratedData\Demographics.csv', header =0)
-
-ICURecord_raw = pd.read_csv(r'C:\Document\GeneratedData\ICURecord.csv', header =0)
 
 
 
@@ -71,6 +62,3 @@ def CohortSelection(DischargeDiagnosis, ICDCodeBook, Demographics, ICURecord):
     print('The Description of Patients with SpecificDisease NOT Entering ICU the first day is:')
     print(CohortFirstDayNotICU.describe())
     return CohortDemographics
-
-results = CohortSelection(DischargeDiagnosis_raw, ICDCodeBook, Demographics_raw, ICURecord_raw)
-results.to_excel(r'C:\Document\GeneratedData\Cohort_ICU_Record.xlsx', sheet_name='Sheet1', index = False) 
