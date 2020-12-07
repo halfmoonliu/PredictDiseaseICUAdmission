@@ -2,10 +2,6 @@
 import pandas as pd
 import GenerateData
 
-
-
-
-
 def CombineFinalDiagnosis(DiagnosisDataFrame):
 
     
@@ -15,7 +11,7 @@ def CombineFinalDiagnosis(DiagnosisDataFrame):
 
 
 
-    Diagnosis_All = DischargeDiagnosis_raw[['AdmissionID','DiagnosisCode0', 'DiagnosisCode1', 'DiagnosisCode2', 'DiagnosisCode3',
+    Diagnosis_All = DiagnosisDataFrame[['AdmissionID','DiagnosisCode0', 'DiagnosisCode1', 'DiagnosisCode2', 'DiagnosisCode3',
                                             'DiagnosisCode4', 'DiagnosisCode5', 'DiagnosisCode6', 'DiagnosisCode7', 'DiagnosisCode8', 'DiagnosisCode9']]
 
     print("Done. Start stacking diagnosis results..")
@@ -40,7 +36,3 @@ def CombineFinalDiagnosis(DiagnosisDataFrame):
         Diagnosis_Stacked= Diagnosis_Stacked.dropna(subset=['DiagnosisCode'])#Drop Null value
 
     return Diagnosis_Stacked
-
-DiagnosisStacked = CombineFinalDiagnosis(DischargeDiagnosis_raw)
-
-print(DiagnosisStacked.head(10))
