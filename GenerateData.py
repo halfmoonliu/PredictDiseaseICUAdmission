@@ -263,7 +263,7 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
         
         #ICU Record
         ICU_TXR_Times_list = [0, 1, 2, 3, 4]
-        ICU_TXR_Times_Prob_list = [0.8, 0.1, 0.05, 0.01, 0.01]
+        ICU_TXR_Times_Prob_list = [0.7, 0.2, 0.05, 0.01, 0.01]
         ICU_TXR_Times = random.choices(ICU_TXR_Times_list, ICU_TXR_Times_Prob_list, k=1)
 
         
@@ -271,9 +271,24 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
         LatestInICUTime = AdmissionDateTime
 
         LatestOutICUTime = AdmissionDateTime
+        FirstICU = True
         for ICURecordInd in range(ICU_TXR_Times[0]):
-            LatestInICUTime = GenerateDateTime(LatestOutICUTime, DischargeDateTime)
-            LatestOutICUTime = GenerateDateTime(LatestInICUTime,AdmEndDateTime)
+            
+            Prob_ICU24H = random.randint(0, 6)
+            if Prob_ICU24H != 0 and FirstICU == True:
+                AdmissionPlus24H = datetime.datetime(*time.strptime(time.strftime(AdmissionDateTime), '%m/%d/%Y %H:%M:%S')[:6])+ datetime.timedelta(days = 1, hours = int(random.random()*60), seconds = int(random.random()*60))
+                AdmissionPlus24H = time.strftime('%m/%d/%Y %H:%M:%S', AdmissionPlus24H.timetuple())
+                LatestInICUTime = GenerateDateTime(LatestOutICUTime, AdmissionPlus24H)
+                LatestOutICUTime = GenerateDateTime(LatestInICUTime, DischargeDateTime)
+                FirstICU == False
+            elif Prob_ICU24H == 0 and FirstICU == True:
+                LatestInICUTime = GenerateDateTime(LatestOutICUTime, DischargeDateTime)
+                LatestOutICUTime = GenerateDateTime(LatestInICUTime, DischargeDateTime)
+                FirstICU == False                
+            else:
+                LatestInICUTime = GenerateDateTime(LatestOutICUTime, DischargeDateTime)
+                LatestOutICUTime = GenerateDateTime(LatestInICUTime, DischargeDateTime)
+            LatestOutICUTime = GenerateDateTime(LatestInICUTime, DischargeDateTime)
             ICURecord_list.append([AdmissionID, LatestInICUTime, LatestOutICUTime])
             
         #Vital Sign
@@ -335,6 +350,6 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
     ICURecord_df = pd.DataFrame(ICURecord_list, columns = ['AdmissionID', 'InICUDatetime', 'OutICUDateTime'])
     VitalSign_df = pd.DataFrame(VitalSign_list, columns = ['AdmissionID', 'RecordDateTime', 'VitalSignType', 'VitalSignValue'])
     Exam_df = pd.DataFrame(Exam_list, columns = ['AdmissionID', 'ReportDateTime', 'ExamType', 'ExamResult'])
-    return Demographics_df, DischargeDiagnosis_df, ICURecord_df, VitalSign_df, Exam_df, ICDCodeBook                                                         
+    return Demographics_df, DischargeDiagnosis_df, ICURecord_df, VitalSign_df, Exam_df, ICDCodeBook                                           
 #Demographics_raw , DischargeDiagnosis_raw, ICURecord_raw, VitalSign_df, Exam_df, ICDCodeBook = GenerateDataset(50, "1/1/1982", "12/31/2000", "1/1/2000 00:00:00", "12/31/2010 23:59:59")
 #Demographics_raw.head()                                        
