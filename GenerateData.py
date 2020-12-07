@@ -9,6 +9,7 @@ import string
 import time
 
 
+
 def GenerateDate(start, end):
     """Get a time at a proportion of a range of two formatted times.
     start and end should be strings specifying times formateed in the following format:
@@ -69,7 +70,7 @@ def GeneratePseudoICDDiseaseGroup(NumICD, NumComorbid):
         DiseaseProb_Total += ComorbidProb
    
     #Specific Disease
-    SpecificDiseaseProb = random.randint(1, 5)*0.01
+    SpecificDiseaseProb = random.randint(1, 5)*0.03
     DiseaseProb_Total += SpecificDiseaseProb
     DiseaseGroup_list.append('SpecificDisease')
     DiseaseProb_list.append(ComorbidProb)
@@ -205,14 +206,17 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
   
     #The function returns a pandas dataframe Num of data with     
     #Num Number of admission data generated from the function, limited to 1 to 999,999.
-    Counter = 0
+    Counter = 1
     Demographics_list = list()
     DischargeDiagnosis_list = list()
     ICURecord_list = list()
     VitalSign_list = list()
     Exam_list = list()
-    
-    while Counter < Num:
+    ICDCodeBook = GeneratePseudoICDDiseaseGroup(1000,5)
+    All_DiagnosisCode_list = ICDCodeBook['PseudoICD'].tolist()
+    while Counter <= Num:
+
+
        
         #Demographics
         
@@ -220,7 +224,9 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
         
         #AdmissionID
         NoDigit = int(math.log10(Num))+1 
-        AdmissionID = 'Adm'+(NoDigit-int(math.log10(Counter+1)))*'0'+str(Counter)
+        AdmissionID = 'Adm'+(NoDigit-int(math.log10(Counter)))*'0'+str(Counter)
+        if Counter %500 ==0:
+            print("Start fabricating data of " + AdmissionID +"...")
         DemographicsRow_list.append(AdmissionID)
         #Sex: 1 indicates male, 0 indicates female
         DemographicsRow_list.append(str(random.randint(0, 1)))
@@ -232,7 +238,7 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
 
         DemographicsRow_list.append(AdmissionDateTime)
         #InHospitalDays & DischargeDateTime
-        InHospitalDays = random.randrange(1, 365)       
+        InHospitalDays = random.randrange(1, 30)       
         #DischargeDateTime
         DischargeDateTime = datetime.datetime(*time.strptime(time.strftime(AdmissionDateTime), '%m/%d/%Y %H:%M:%S')[:6])+ datetime.timedelta(days = InHospitalDays, hours = int(random.random()*60), seconds = int(random.random()*60))
 
@@ -246,9 +252,8 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
         Demographics_list.append(DemographicsRow_list)
 
         #Dischage Diagnosis
-        ICDCodebook = GeneratePseudoICDDiseaseGroup(1000,10)
         DischargeDiagnosisAdm_list = [AdmissionID]
-        All_DiagnosisCode_list = ICDCodebook['PseudoICD'].tolist()
+        
         NumDiagAdm = random.randint(1, 10)
         for DianosisInd in range(NumDiagAdm):
             DischargeDiagnosisAdm_list.append(random.choice(All_DiagnosisCode_list))
@@ -281,12 +286,18 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
             
             
             VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Temperature', GenerateVitalSign('Temperature', Recorded_Age)])
+            
+            VitalSignTimePoint = datetime.datetime.strptime(AdmissionDateTime, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = int((VitalSignTimeDif+random.randint(5, 180))*24*60*60+random.randint(5, 180))) 
+            
             VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Breath Rate', GenerateVitalSign('Breath Rate', Recorded_Age)])
+            VitalSignTimePoint = datetime.datetime.strptime(AdmissionDateTime, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = int((VitalSignTimeDif+random.randint(5, 180))*24*60*60+random.randint(5, 180)))             
             VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Pulse', GenerateVitalSign('Pulse', Recorded_Age)])
             
             if int(VitalSignTimeDif*10)%10%3 == 0:#measure 3 times a day
                 VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Systolic Pressure', GenerateVitalSign('Systolic Pressure', Recorded_Age)])
+                VitalSignTimePoint = datetime.datetime.strptime(AdmissionDateTime, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = int((VitalSignTimeDif+random.randint(5, 180))*24*60*60+random.randint(5, 180))) 
                 VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Diastolic Pressure', GenerateVitalSign('Diastolic Pressure', Recorded_Age)])
+                VitalSignTimePoint = datetime.datetime.strptime(AdmissionDateTime, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = int((VitalSignTimeDif+random.randint(5, 180))*24*60*60+random.randint(5, 180))) 
                 VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'SpO2', GenerateVitalSign('SpO2', Recorded_Age)])            
             
         #Exam
@@ -323,8 +334,7 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
     DischargeDiagnosis_df = pd.DataFrame(DischargeDiagnosis_list, columns = ['AdmissionID','DiagnosisCode0', 'DiagnosisCode1', 'DiagnosisCode2', 'DiagnosisCode3', 'DiagnosisCode4', 'DiagnosisCode5', 'DiagnosisCode6', 'DiagnosisCode7', 'DiagnosisCode8', 'DiagnosisCode9'])
     ICURecord_df = pd.DataFrame(ICURecord_list, columns = ['AdmissionID', 'InICUDatetime', 'OutICUDateTime'])
     VitalSign_df = pd.DataFrame(VitalSign_list, columns = ['AdmissionID', 'RecordDateTime', 'VitalSignType', 'VitalSignValue'])
-    Exam_df = pd.DataFrame(Exam_list, columns = ['AdmissionID', 'SamplingDateTime', 'ExamType', 'ExamResult'])
-    return Demographics_df, DischargeDiagnosis_df, ICURecord_df, VitalSign_df, Exam_df, ICDCodebook                                   
-                                   
-#Demographics_raw , DischargeDiagnosis_raw, ICURecord_raw, VitalSign_df, Exam_df= GenerateDataset(50, "1/1/1982", "12/31/2000", "1/1/2000 00:00:00", "12/31/2010 23:59:59")
+    Exam_df = pd.DataFrame(Exam_list, columns = ['AdmissionID', 'ReportDateTime', 'ExamType', 'ExamResult'])
+    return Demographics_df, DischargeDiagnosis_df, ICURecord_df, VitalSign_df, Exam_df, ICDCodeBook                                                         
+#Demographics_raw , DischargeDiagnosis_raw, ICURecord_raw, VitalSign_df, Exam_df, ICDCodeBook = GenerateDataset(50, "1/1/1982", "12/31/2000", "1/1/2000 00:00:00", "12/31/2010 23:59:59")
 #Demographics_raw.head()                                        
