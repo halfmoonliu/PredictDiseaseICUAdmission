@@ -18,7 +18,7 @@ def CohortSelection(DischargeDiagnosis, ICDCodeBook, Demographics, ICURecord):
     2. ICD Code Book mapping Pseudo ICD codes and Disease Group
     3. Demographics, including hospital in out records.
     4. Patient in/out ICU records.
-    The function returns a datafrae of patients with groups and hospital inout records.
+    The function returns a dataframe of patients with groups and hospital inout records.
     '''
     print("Start selecting cohort with diagnosis of SpecificDisease, sepratting the cohort into patients transfered to ICU or not.")
     DischargeDiagnosis_stacked = Libraries.CombineFinalDiagnosis(DischargeDiagnosis)
