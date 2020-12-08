@@ -7,16 +7,8 @@ Created on Tue Dec  8 17:30:48 2020
 import numpy as np
 import pandas as pd
 import sys
-sys.path.insert(0, 'C:\Document\GeneratedData')
+# Project Libraries
 import Libraries
-
-ICDCodeBook = pd.read_csv(r'C:\Document\GeneratedData\ICDCodebook.csv', header =0)
-
-
-DischargeDiagnosis_raw = pd.read_csv(r'C:\Document\GeneratedData\DischargeDiagnosis.csv', header =0)
-
-Cohort_raw = pd.read_excel(r'C:\Document\GeneratedData\Cohort_ICU24H.xlsx', header =0)
-
 
 
 def ComorbidConditions(DischargeDiagnosis, ICDCodeBook, Cohort):
@@ -54,5 +46,3 @@ def ComorbidConditions(DischargeDiagnosis, ICDCodeBook, Cohort):
     
     return Cohort_ComorbidCoditions_df
 
-results = ComorbidConditions(DischargeDiagnosis_raw, ICDCodeBook, Cohort_raw)
-results.to_excel(r'C:\Document\GeneratedData\ComorbidConditions.xlsx', sheet_name='Sheet1', index = False) 
