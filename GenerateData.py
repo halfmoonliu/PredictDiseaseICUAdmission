@@ -64,7 +64,7 @@ def GeneratePseudoICDDiseaseGroup(NumICD, NumComorbid):
     DiseaseProb_Total = 0
     
     for ind in range(NumComorbid):
-        DiseaseGroup_list.append('CormorbidCondition'+str(ind+1))
+        DiseaseGroup_list.append('ComorbidCondition'+str(ind+1))
         ComorbidProb = random.randint(1, 5)*0.01
         DiseaseProb_list.append(ComorbidProb)
         DiseaseProb_Total += ComorbidProb
