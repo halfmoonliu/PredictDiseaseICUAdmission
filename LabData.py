@@ -1,23 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec  8 17:30:48 2020
 
-@author: halfmoonliu
-"""
 import numpy as np
 import pandas as pd
 import re
 import sys
-sys.path.insert(0, 'C:\Document\GeneratedData')
 import Libraries
 
 
-
-
-
-
-Cohort_raw = pd.read_excel(r'C:\Document\GeneratedData\Cohort_ICU24H.xlsx', header =0)
-Exam_raw = pd.read_csv(r'C:\Document\GeneratedData\Exam.csv', header =0)
 
 
 def LabData(Cohort, LabExam):
@@ -102,6 +90,3 @@ def LabData(Cohort, LabExam):
     
     
     return LabExamOneHot_AccountID_df
-
-results = LabData(Cohort_raw, Exam_raw)
-results.to_excel(r'C:\Document\GeneratedData\ExamOneHot.xlsx', sheet_name='Sheet1', index = False) 
