@@ -1,8 +1,8 @@
-# Predict the Need for ICU Admission for Patients with Specific Disease
+# Predict the Need for ICU Admission for Patients with SpecificDisease
 
-In this directory, we will walk through a woking demo for predicting the need for ICU admission within the first 24 hours of admission.
+In this directory, we will walk through a woking demo for predicting the need for ICU transfer of patients with SpecificDisease within the first 24 hours of admission.
 
-Below are the main scripts used in the project:
+Below is a summary of files in this projects:
 
 0. __**ProjectWalkthrough**__: Slider presenting the results of project objective, exploratory analyais and model comparison results.
 1. __**GenerateData**__: Generate the data needed for the demo, including patient admission record, ICD codebook, demographic data, discharge diagnosis, Exam data and vital signs.                          This project makes use of self-generated data to avoid privacy issue of real-world data.
