@@ -1,20 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec  8 17:30:48 2020
-
-@author: halfmoonliu
-"""
 import numpy as np
 import pandas as pd
 
-
-
-
-
-
-
-Cohort_raw = pd.read_excel(r'C:\Document\GeneratedData\Cohort_ICU24H.xlsx', header =0)
-VitalSign_raw = pd.read_csv(r'C:\Document\GeneratedData\VitalSign.csv', header =0)
 
 
 def VitalSign(Cohort, VitalSign):
@@ -74,7 +60,7 @@ def VitalSign(Cohort, VitalSign):
     
     Selective_Items = ['Temperature_MAX', 'Pulse_MAX',  'Systolic Pressure_MIN', 'Diastolic Pressure_MIN']
     
-    
+    #Display selective descriptive statistics of vital signs
     VitalSignOneHot_FirstDayICU = VitalSignOneHot.loc[VitalSignOneHot['FirstDayICU']=="Y"]
     
     
@@ -88,12 +74,7 @@ def VitalSign(Cohort, VitalSign):
     for item in Selective_Items:
         print(VitalSignOneHot_NotFirstDayICU[item].describe())
     
-    
-    
+ 
     
     
     return VitalSignOneHot
-
-results = VitalSign(Cohort_raw, VitalSign_raw)
-
-results.to_excel(r"C:\Document\GeneratedData\VitalSignOneHot.xlsx", sheet_name='Sheet1', index = False) 
