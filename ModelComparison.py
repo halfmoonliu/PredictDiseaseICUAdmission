@@ -1,38 +1,16 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Dec 14 17:21:40 2020
-
-@author: halfmoonliu
-"""
-
-
-
-
-
-
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-
 from sklearn.model_selection import train_test_split
-
 from sklearn.preprocessing import StandardScaler
-
 from sklearn import metrics
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-
 from sklearn.svm import SVC
 import torch 
 import xgboost as xgb
 
-
-
-
-
-Dataset = pd.read_excel("C:\Document\GeneratedData\Dataset.xlsx", header = 0)
 
 def ModelComparison(Dataset):
     '''
@@ -48,9 +26,6 @@ def ModelComparison(Dataset):
     print("Hello, welcome to this routine.")
     print("This routine aims at comparing model performance with ROC curves...")
     
-
-
-
 
     Dataset_df = Dataset
     def GroupInt(text):
@@ -97,8 +72,6 @@ def ModelComparison(Dataset):
 
 
 
-
-
     feature_cols = ['Age', 'Sex_int',
                    #ComorbidConditions
                    'ComorbidCondition1', 'ComorbidCondition2', 'ComorbidCondition3', 'ComorbidCondition4', 'ComorbidCondition5',
@@ -106,11 +79,8 @@ def ModelComparison(Dataset):
                    'PathogenA',
                    #LabData
                    'LabItemA', 'LabItemB', 'LabItemC',
-
                    #VitalSign
-                   'Temperature_MAX', 'Pulse_MAX',  'Systolic Pressure_MIN', 'Diastolic Pressure_MIN'
-                   
-                   ] 
+                   'Temperature_MAX', 'Pulse_MAX',  'Systolic Pressure_MIN', 'Diastolic Pressure_MIN'] 
 
 
     X = Dataset_df[feature_cols] # Features
@@ -177,11 +147,6 @@ def ModelComparison(Dataset):
 
 
 
-
-
-
-
-
     class Feedforward(torch.nn.Module):
             def __init__(self, input_size, hidden_size1, hidden_size2):
                 super(Feedforward, self).__init__()
@@ -222,18 +187,9 @@ def ModelComparison(Dataset):
 
 
 
-
-
-
-
     model = Feedforward(15, 3, 3)
     criterion = torch.nn.BCELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr = 0.01)
-
-
-
-
-
 
 
     model.train()   
@@ -273,12 +229,8 @@ def ModelComparison(Dataset):
 
 
     #Random Forest
-
-
-
     Model_RandomForest = RandomForestClassifier(n_estimators = 50, criterion = "gini")
     Model_RandomForest.fit(X_train, y_train)
-
     y_pred_RandomForest = Model_RandomForest.predict(X_test)
 
     print("Accuracy_test_RF:" + str(round(metrics.accuracy_score(y_test, y_pred_RandomForest), 3)))
@@ -289,12 +241,10 @@ def ModelComparison(Dataset):
     y_pred_RandomForest_prob = Model_RandomForest.predict_proba(X_test)[:,1]
     
     #XGBoost
-
     Model_XGBoost =xgb.XGBClassifier(max_depth= 3, learning_rate= 0.4, verbosity = 0, objective = 'binary:logistic')
     Model_XGBoost.fit(X_train, y_train,eval_metric = 'auc',  verbose = None)
-   
     y_pred_XGBoost = Model_XGBoost.predict(X_test)
-    
+  
     print("Accuracy_test_XGB:" + str(round(metrics.accuracy_score(y_test,y_pred_XGBoost), 3)))
     print("Precision_test_XGB:" +  str(round(metrics.precision_score(y_test,y_pred_XGBoost), 3)))
     print("Recall_test_XGB:" + str(round(metrics.recall_score(y_test, y_pred_XGBoost), 3)))
@@ -360,4 +310,3 @@ def ModelComparison(Dataset):
 
 
     return None
-ModelComparison(Dataset)
