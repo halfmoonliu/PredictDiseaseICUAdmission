@@ -2,7 +2,6 @@
 import numpy as np
 import pandas as pd
 import re
-import sys
 import Libraries
 
 
@@ -10,11 +9,11 @@ import Libraries
 
 def LabData(Cohort, LabExam):
     '''
-    The function takes four dataframes as input, 
-    1. Patient Cohort for identifying comorbid conditions
+    The function takes two dataframes as input, 
+    1. Patient Cohort for retrieving lab data
     2. Lab Exam Results
 
-    The function returns a dataframe of AdmissionID and ComorbidCondition1~5, one hot encoded
+    The function returns a dataframe of AdmissionID and selective lab exam results, categorical results one hot encoded
     '''
     print("Start selecting lab exam results of the cohort....")
     
