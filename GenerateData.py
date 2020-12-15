@@ -302,17 +302,18 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
             
             VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Temperature', GenerateVitalSign('Temperature', Recorded_Age)])
             
-            VitalSignTimePoint = datetime.datetime.strptime(AdmissionDateTime, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = int((VitalSignTimeDif+random.randint(5, 180))*24*60*60+random.randint(5, 180))) 
-            
+            VitalSignTimePoint = VitalSignTimePoint + datetime.timedelta(seconds = random.randint(5, 180))
             VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Breath Rate', GenerateVitalSign('Breath Rate', Recorded_Age)])
-            VitalSignTimePoint = datetime.datetime.strptime(AdmissionDateTime, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = int((VitalSignTimeDif+random.randint(5, 180))*24*60*60+random.randint(5, 180)))             
+            
+            VitalSignTimePoint = VitalSignTimePoint + datetime.timedelta(seconds = random.randint(5, 180))
             VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Pulse', GenerateVitalSign('Pulse', Recorded_Age)])
             
             if int(VitalSignTimeDif*10)%10%3 == 0:#measure 3 times a day
+                VitalSignTimePoint = VitalSignTimePoint + datetime.timedelta(seconds = random.randint(5, 180))
                 VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Systolic Pressure', GenerateVitalSign('Systolic Pressure', Recorded_Age)])
-                VitalSignTimePoint = datetime.datetime.strptime(AdmissionDateTime, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = int((VitalSignTimeDif+random.randint(5, 180))*24*60*60+random.randint(5, 180))) 
+                VitalSignTimePoint = VitalSignTimePoint + datetime.timedelta(seconds = random.randint(5, 180))
                 VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Diastolic Pressure', GenerateVitalSign('Diastolic Pressure', Recorded_Age)])
-                VitalSignTimePoint = datetime.datetime.strptime(AdmissionDateTime, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = int((VitalSignTimeDif+random.randint(5, 180))*24*60*60+random.randint(5, 180))) 
+                VitalSignTimePoint = VitalSignTimePoint + datetime.timedelta(seconds = random.randint(5, 180))
                 VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'SpO2', GenerateVitalSign('SpO2', Recorded_Age)])            
             
         #Exam
@@ -351,5 +352,4 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
     VitalSign_df = pd.DataFrame(VitalSign_list, columns = ['AdmissionID', 'RecordDateTime', 'VitalSignType', 'VitalSignValue'])
     Exam_df = pd.DataFrame(Exam_list, columns = ['AdmissionID', 'ReportDateTime', 'ExamType', 'ExamResult'])
     return Demographics_df, DischargeDiagnosis_df, ICURecord_df, VitalSign_df, Exam_df, ICDCodeBook                                           
-#Demographics_raw , DischargeDiagnosis_raw, ICURecord_raw, VitalSign_df, Exam_df, ICDCodeBook = GenerateDataset(50, "1/1/1982", "12/31/2000", "1/1/2000 00:00:00", "12/31/2010 23:59:59")
-#Demographics_raw.head()                                        
+                                  
