@@ -1,6 +1,6 @@
 # Predict the Need for ICU Admission for Patients with SpecificDisease
 
-In this directory, we will walk through a woking demo for predicting the need for ICU transfer of patients with SpecificDisease within the first 24 hours of admission.
+In this repository, we will walk through a woking demo for predicting the need for ICU transfer of patients with SpecificDisease within the first 24 hours of admission.
 
 Below is a summary of files in this projects:
 
