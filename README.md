@@ -4,7 +4,7 @@ In this repository, we will walk through a woking demo for predicting the need f
 
 Below is a summary of files in this projects:
 
-0. __**ProjectWalkthrough**__: Slides presenting the results of project objective, exploratory analyais and model comparison results.
+0. __**ProjectWalkthrough**__: Slides presenting the project objectives, exploratory analyais and model comparison results.
 1. __**GenerateData**__: Generate the data needed for the demo, including patient admission record, ICD codebook, demographic data, discharge diagnosis, Exam data and vital signs.                          This project makes use of self-generated data to avoid privacy issue of real-world data.
 2. __**Libraries**__: A library containing preprocessing or ETL scripts which is used across settings.
 3. __**CohortSelection**__: Used to choose the patients with SpecificDisease for ICU Admission evaluation.
