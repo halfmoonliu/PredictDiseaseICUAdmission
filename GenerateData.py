@@ -11,12 +11,12 @@ import time
 
 
 def GenerateDate(start, end):
-    """Get a time at a proportion of a range of two formatted times.
-    start and end should be strings specifying times formateed in the following format:
-    'M(M)/D(D)/yyyy"
-    , giving an interval [start, end].
-    prop specifies how a proportion of the interval to be taken after
-    start.  The returned time will be in the specified format.
+    """
+    The function returns a date string between start and end.
+    start and end should be strings specifying dates in the following format:
+    'M(M)/D(D)/yyyy".
+    The output is also of the same format.
+
     """
  
     formatDate =  '%m/%d/%Y'
@@ -29,12 +29,11 @@ def GenerateDate(start, end):
     return time.strftime(formatDate, time.localtime(ptime))
 
 def GenerateDateTime(start, end):
-    """Get a time at a proportion of a range of two formatted times.
-    start and end should be strings specifying times formateed in the following format:
+    """
+    The function returns a datetime string between start and end.
+    start and end should be strings specifying datetime in the following format:
     'M(M)/D(D)/yyyy h(h):m(m):s(s)"
-    , giving an interval [start, end].
-    prop specifies how a proportion of the interval to be taken after
-    start.  The returned time will be in the specified format.
+    The output is also of the same format.
     """
     
 
