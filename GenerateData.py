@@ -274,7 +274,8 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
         for ICURecordInd in range(ICU_TXR_Times[0]):
             
             Prob_ICU24H = random.randint(0, 6)
-            if Prob_ICU24H != 0 and FirstICU == True:
+            
+            if Prob_ICU24H != 0 and FirstICU == True: #Most patients ever entered ICU were transferred with 24h of admission, for the first time.
                 AdmissionPlus24H = datetime.datetime(*time.strptime(time.strftime(AdmissionDateTime), '%m/%d/%Y %H:%M:%S')[:6])+ datetime.timedelta(days = 1, hours = int(random.random()*60), seconds = int(random.random()*60))
                 AdmissionPlus24H = time.strftime('%m/%d/%Y %H:%M:%S', AdmissionPlus24H.timetuple())
                 LatestInICUTime = GenerateDateTime(LatestOutICUTime, AdmissionPlus24H)
@@ -294,7 +295,7 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
         VitalSignTimePoint = AdmissionDateTime
         VitalSignTimeDif = -1 #minus one day before admission
         while VitalSignTimeDif < InHospitalDays:
-            VitalSignTimeDif += random.uniform(0.3, 0.4)
+            VitalSignTimeDif += random.uniform(0.3, 0.4) #temperature breath rate, pulse are measured around 3 times a day
             VitalSignTimePoint = datetime.datetime.strptime(AdmissionDateTime, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = int(VitalSignTimeDif*24*60*60))
             Recorded_Age = (dateutil.relativedelta.relativedelta(datetime.datetime.strptime(Birthdate, '%m/%d/%Y'), VitalSignTimePoint).days)/365.25
             
@@ -307,7 +308,7 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
             VitalSignTimePoint = VitalSignTimePoint + datetime.timedelta(seconds = random.randint(5, 180))
             VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Pulse', GenerateVitalSign('Pulse', Recorded_Age)])
             
-            if int(VitalSignTimeDif*10)%10%3 == 0:#measure 3 times a day
+            if int(VitalSignTimeDif*10)%10%3 == 0: #blood pressure and blood saturatio are measured around 1 time a day
                 VitalSignTimePoint = VitalSignTimePoint + datetime.timedelta(seconds = random.randint(5, 180))
                 VitalSign_list.append([AdmissionID, VitalSignTimePoint, 'Systolic Pressure', GenerateVitalSign('Systolic Pressure', Recorded_Age)])
                 VitalSignTimePoint = VitalSignTimePoint + datetime.timedelta(seconds = random.randint(5, 180))
@@ -317,7 +318,7 @@ def GenerateDataset(Num, StartBirthDate, EndBirthDate, AdmStartDateTime, AdmEndD
             
         #Exam
         ExamTimePoint = AdmissionDateTime
-        ExamTimeDif = -3 #minus one day before admission
+        ExamTimeDif = -3 #minus three days before admission
         while ExamTimeDif < InHospitalDays:
             ExamTimeDif += random.uniform(0.9, 1.2)
             
