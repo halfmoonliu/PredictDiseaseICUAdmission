@@ -9,7 +9,7 @@ Below is a summary of files in this projects:
 2. __**Libraries**__: A library containing preprocessing or ETL scripts used in the project.
 3. __**CohortSelection**__: Used to choose the patients with SpecificDisease for the evaluation of the need for ICU Admission.
 4. __**ComorbidityConditions**__: The script utilizes discharge diagnosis code of patients and categorize them into 5 comorbid conditions.
-5. __**Labdata**__: Extract and preprocess clinically relavent lab data, or bio-chemical exam, results.
+5. __**Labata**__: Extract and preprocess clinically relavent lab data, or bio-chemical exam, results.
 6. __**VitalSign**__: Extract and preprocess vital signs (e.g. body temperature, blood pressure and pulse) for model buildup.
 7. __**FeatureSelection**__: Choose relevant features to create dataset for model buildup.
 8. __**ModelComparison**__: Compare the performances of diffrent family of machine learning algorithms with common indices, such as overall acuracy, precision, recall, F1 Score and area the under receivor operation characteristic curve.
