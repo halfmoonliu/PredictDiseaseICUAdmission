@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Dec  7 16:32:56 2020
-
-@author: halfmoonliu
-"""
 import numpy as np
 import pandas as pd
 import sys
@@ -14,8 +8,8 @@ import Libraries
 def CohortSelection(DischargeDiagnosis, ICDCodeBook, Demographics, ICURecord):
     '''
     The function takes four dataframes as input, 
-    1. Discharge diagnosis of in patients, 
-    2. ICD Code Book mapping Pseudo ICD codes and Disease Group
+    1. Discharge diagnosis of in-patients, 
+    2. ICD Code Book mapping pseudo ICD codes and Disease Group
     3. Demographics, including hospital in out records.
     4. Patient in/out ICU records.
     The function returns a dataframe of patients with groups and hospital inout records.
