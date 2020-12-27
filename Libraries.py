@@ -8,9 +8,6 @@ def CombineFinalDiagnosis(DiagnosisDataFrame):
     print("Hi, welcome to the routine.")
     print("This routine aims at combining all final diagnoses")
 
-
-
-
     Diagnosis_All = DiagnosisDataFrame[['AdmissionID','DiagnosisCode0', 'DiagnosisCode1', 'DiagnosisCode2', 'DiagnosisCode3',
                                             'DiagnosisCode4', 'DiagnosisCode5', 'DiagnosisCode6', 'DiagnosisCode7', 'DiagnosisCode8', 'DiagnosisCode9']]
 
