@@ -1,16 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec  8 17:30:48 2020
-
-@author: halfmoonliu
-"""
 import numpy as np
 import pandas as pd
 import sys
 # Project Libraries
 import Libraries
-
-
 def ComorbidConditions(DischargeDiagnosis, ICDCodeBook, Cohort):
     '''
     The function takes four dataframes as input, 
