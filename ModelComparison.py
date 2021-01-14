@@ -77,7 +77,7 @@ def ModelComparison(Dataset):
     X = Dataset_df[feature_cols] # Features
     y = Dataset_df.Group # Target variable
 
-    X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
 
     scale_Standard = StandardScaler() 
@@ -116,7 +116,7 @@ def ModelComparison(Dataset):
     #Logistic Regression
 
     Model_LogReg = LogisticRegression(penalty = 'l2')
-    Model_LogReg.fit(X_train,y_train)
+    Model_LogReg.fit(X_train, y_train)
 
     y_pred_LogReg= Model_LogReg.predict(X_test)
     y_pred_LogReg_prob = Model_LogReg.predict_proba(X_test)[:,1]
