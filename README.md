@@ -14,4 +14,4 @@ Below is a summary of files in this projects:
 7. __**FeatureSelection**__: Choose relevant features to create dataset for model buildup.
 8. __**ModelComparison**__: Compare the performances of diffrent family of machine learning algorithms with common indices, such as overall acuracy, precision, recall, F1 Score and area the under receivor operation characteristic curve.
 
- Check also __<ins>my website</ins>__(https://halfmoonliu.github.io/posts/evaluate-intensive-care-needs-with-ml-link/) for more detailed description!
+ Check also __<ins>my blog post</ins>__ (https://halfmoonliu.github.io/posts/evaluate-intensive-care-needs-with-ml-link/) for more detailed description!
