@@ -1,6 +1,6 @@
 # Predict the Need for ICU Admission for Patients with SpecificDisease
 
-The aim of this repository is to provide a workflow demo of training machine learning models for clinical decision support, from data cleansing, exploratory analysis to model training and result comparison. The code here utilizes randomly generated electronic health records (EHRs). The workflow was applied on pediatric pneumonia patient risk evaluation, achieving an AuROC of .99 on the task of evaluation need for intensive care. The results and detailed methodologies were published on *JMIR Medical Informatics* (Liu et al., 2022).
+The scripts in this repository demonstrates the workflow of training machine learning models for clinical decision support, from data cleansing, exploratory analysis to model training and result comparison. The codes here utilize randomly generated electronic health records (EHRs). The workflow was applied on pediatric pneumonia patient risk evaluation, achieving an AuROC of .99 on the task of evaluation need for intensive care. The results and detailed methodologies were published on *JMIR Medical Informatics* (Liu et al., 2022).
 
 Below is a summary of files in this projects:
 
